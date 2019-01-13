@@ -3,6 +3,8 @@ package com.example.omer4.filepractice;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,12 +34,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("credits");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(this, "This app was created by Omer Eikly", Toast.LENGTH_LONG).show();
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void Write(View view) {
         String str = et.getText().toString();
         FileOutputStream fo = null;
         try {
-            fo = openFileOutput("user_input.txt", Context.MODE_PRIVATE);
+            fo = openFileOutput("FilePrac.txt", Context.MODE_PRIVATE);
             OutputStreamWriter osw = new OutputStreamWriter(fo);
             BufferedWriter bw = new BufferedWriter(osw);
             try {
@@ -53,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Read(View view) {
         try {
-            InputStream is = openFileInput("user_input.txt");
+            InputStream is = openFileInput("FilePrac.txt");
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
             StringBuffer buffer = new StringBuffer();
